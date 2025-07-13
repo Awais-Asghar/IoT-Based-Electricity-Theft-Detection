@@ -67,6 +67,7 @@ The system compares two current values. If the difference exceeds a threshold, i
 
 
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/66f90eb5-4eb6-442e-90f1-d998fc5ff6ed" />
+<img width="2000" height="937" alt="Image" src="https://github.com/user-attachments/assets/0baee51b-7fa2-4824-846a-c62975bbbe59" />
 
 ---
 
@@ -160,7 +161,7 @@ Serial.println("Power Theft Detected!");
 - Incorporate **Machine Learning models** to analyze and predict theft behavior  
 - Add an **Auto Reset Relay** function after theft alert acknowledgment  
 
-<img width="2000" height="937" alt="Image" src="https://github.com/user-attachments/assets/0baee51b-7fa2-4824-846a-c62975bbbe59" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/9994d6dc-f885-46f9-8ddf-79c2e4e69d73" />
 
 ---
 
