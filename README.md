@@ -1,204 +1,209 @@
-# IoT_Based_Electricity_Theft_Detection
+# IoT Based Electricity Theft Detection System
 
-## Overview
+![Project Status](https://img.shields.io/badge/Status-Completed-brightgreen.svg)
+![Sensors](https://img.shields.io/badge/Sensors-ACS712%20%7C%20IR-yellow.svg)
+![Platform](https://img.shields.io/badge/Platform-Arduino-blue.svg)
+![Language](https://img.shields.io/badge/Language-C%2FC%2B%2B-pink.svg)
+![IDE](https://img.shields.io/badge/IDE-Arduino%20IDE-purple.svg)
+![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
-This project uses an Arduino to detect power theft by measuring the differential current between two channels. It displays the current readings and differential voltage on an LCD. If power theft is detected, it triggers a relay to disconnect the power and sounds an alarm using a buzzer.
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/3178252b-430e-46e7-93bd-1a638cf1c700" />
+
+---
+
+## Introduction
+
+Electricity theft is a major issue affecting power utilities and national economies. According to **Islamabad Times**, nearly **360 billion rupees worth of electricity was stolen in 2022-23**. This IoT-based solution detects unauthorized consumption by monitoring the current differential in a circuit using ACS712 sensors. If theft is detected, the system disconnects the power using a relay, activates a buzzer, and sends an SMS alert to the configured number via GSM.
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/fad1df2b-4ed0-4536-8ab9-ac0189d1f4b7" />
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/00cd670f-a2ca-4e39-b251-b378297905ae" />
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/66f90eb5-4eb6-442e-90f1-d998fc5ff6ed" />
+
+---
+
+## Project Overview
+
+This smart electricity meter is built using:
+
+- **Arduino UNO**: Microcontroller for logic processing.
+- **ACS712 Current Sensors**: Measure current at two different points.
+- **LCD 16x2 Display**: Show current readings and alerts.
+- **Relay Module**: Cuts off power if theft is detected.
+- **Buzzer**: Audible alert on theft.
+- **GSM Module**: Sends SMS to user (in expanded version).
+- **Potentiometer (10k)**: Controls contrast for LCD.
+
+The system compares two current values. If the difference exceeds a threshold, it assumes power is being illegally diverted.
+
+---
 
 ## Features
 
-- **Current Measurement**: Measures current from two analog channels.
-- **Differential Current Calculation**: Computes the differential current to detect power theft.
-- **LCD Display**: Shows current readings and differential voltage.
-- **Buzzer Alarm**: Sounds an alarm if power theft is detected.
-- **Relay Control**: Disconnects the power when theft is detected.
+- **Dual Current Monitoring** using ACS712 sensors  
+- **Differential Current Detection** to spot theft  
+- **Relay Cutoff + Buzzer Alarm** when theft is detected  
+- **SMS Alert** via GSM module *(optional/expandable)*  
+- **Real-Time LCD Display** of current values and theft status  
+- **Auto Reset After Alert** (if desired via code update)
 
-## Components
+---
 
-- Arduino
-- Liquid Crystal Display (LCD)
-- Relay Module
-- Buzzer
-- Current Sensors
-- Various resistors and capacitors for circuit stabilization
+## Hardware Components
 
-## Pin Configuration
+| Component             | Quantity |
+|----------------------|----------|
+| Arduino UNO          | 1        |
+| ACS712 Current Sensor (20A) | 2        |
+| LCD Display (16x2)   | 1        |
+| Relay Module         | 1        |
+| Buzzer               | 1        |
+| GSM Module (SIM800L) | 1 *(optional)* |
+| Potentiometer (10k)  | 1        |
+| Jumper Wires         | -        |
+| Breadboard/PCB       | 1        |
+| Power Supply         | 1        |
 
-### LCD Display
 
-- `rs` (Pin 7)
-- `en` (Pin 6)
-- `d4` (Pin 5)
-- `d5` (Pin 4)
-- `d6` (Pin 3)
-- `d7` (Pin 2)
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/66f90eb5-4eb6-442e-90f1-d998fc5ff6ed" />
 
-### Sensors and Actuators
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/0ebe5343-6a2f-46fb-a832-0530d02d4707" />
 
-- `analogChannel1` (Analog Pin 0): First current sensor input.
-- `analogChannel2` (Analog Pin 1): Second current sensor input.
-- `BUZZER_PIN` (Pin 8): Buzzer output pin.
-- `RELAY_PIN` (Pin 9): Relay control pin.
+---
 
-### Constants
+## Working Principle
 
-- `sensitivity1` and `sensitivity2`: Sensitivity of the current sensors.
-- `offsetVoltage1` and `offsetVoltage2`: Offset voltages for the current sensors.
+1. The system constantly measures current from **two separate points** using **ACS712 sensors**.
+2. If both values are close (within threshold), the system assumes **normal usage**.
+3. If there's a **significant difference**, the system detects **power theft**.
+4. On detection:
+   - The **relay is triggered** to cut off power.
+   - A **buzzer sounds** an alert.
+   - A **message is sent** via GSM (if configured).
 
-## Code Explanation
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/ae69209f-5ab9-427f-807f-3ce30254bc9c" />
 
-### Libraries and Pin Definitions
+---
 
+## Software Flow & Logic
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/0ebe5343-6a2f-46fb-a832-0530d02d4707" />
+
+### Working Logic
+
+- **Read both sensors** and calculate current values
+- **Compute differential current**
+- If `differentialCurrent ≥ threshold (e.g., 50)`:
+  - Display **“POWER THEFT”**
+  - Trigger **relay + buzzer**
+  - Optionally send **SMS alert**
+- Else, display both currents and differential
+
+---
+
+### Pin Configuration
+
+| Component         | Arduino Pin |
+|------------------|-------------|
+| LCD RS, E, D4-D7 | D7, D6, D5, D4, D3, D2 |
+| ACS712 Sensor 1  | A0          |
+| ACS712 Sensor 2  | A1          |
+| Buzzer           | D8          |
+| Relay            | D9          |
+| GSM TX/RX        | D10/D11 *(if used)* |
+
+---
+
+## Code Summary
+
+- **Libraries Used**: `LiquidCrystal`
+- **Sensor Sensitivity**: 100mV/A
+- **Voltage Reference**: 5V (5000 mV)
+- **Offset Voltage**: 2500 mV (for both sensors)
+- **RMS Calculation**: `(Vpeak - offset) / sensitivity / √2`
+
+**> Ensure that ACS712 sensors are properly calibrated and isolated from mains supply!**
+
+---
+
+## Sample Output
+LCD Display:
+I1 = 2.55 I2 = 2.53 A
+Vd = 0.02
+
+OR
+
+POWER THEFT !!
+-Disconnected-
+
+---
+
+## SMS Alert Integration
+
+To enable SMS alerts:
+
+- Connect **SIM800L GSM module**
+- Use `Serial` to send AT commands
+- Configure destination number using `AT+CMGS`
+
+Example:
 ```cpp
-#include <LiquidCrystal.h>
-
-// Pin Definitions
-LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
-const int analogChannel1 = 0;
-const int analogChannel2 = 1;
-#define BUZZER_PIN 8
-#define RELAY_PIN 9
+Serial.println("AT+CMGF=1");
+Serial.println("AT+CMGS=\"+923XXXXXXXXX\"");
+Serial.println("Power Theft Detected!");
 ```
 
-### Sensor Parameters and Variables
+## Future Enhancements
 
-```cpp
-const int sensitivity1 = 100;
-const int sensitivity2 = 100;
-const int offsetVoltage1 = 2500;
-const int offsetVoltage2 = 2500;
+- Integrate **IoT Cloud Platform** (e.g., ThingSpeak, Blynk) for remote monitoring  
+- Replace GSM with **Wi-Fi (ESP8266)** for real-time internet connectivity  
+- Develop a **Mobile App Dashboard** for live data tracking  
+- Incorporate **Machine Learning models** to analyze and predict theft behavior  
+- Add an **Auto Reset Relay** function after theft alert acknowledgment  
 
-float adcValue1 = 0;
-float adcValue2 = 0;
-double voltage1 = 0;
-double voltage2 = 0;
-double current1 = 0;
-double current2 = 0;
-double differentialCurrent = 0;
-```
+<img width="2000" height="937" alt="Image" src="https://github.com/user-attachments/assets/0baee51b-7fa2-4824-846a-c62975bbbe59" />
 
-### Setup Function
+---
 
-```cpp
-void setup() {
-    pinMode(BUZZER_PIN, OUTPUT);
-    pinMode(RELAY_PIN, OUTPUT);
-    lcd.begin(16, 2);
+## Applications
 
-    lcd.setCursor(0, 0);
-    lcd.print("Power Theft");
-    lcd.setCursor(0, 1);
-    lcd.print("   Detection");
-    delay(2000);
-    lcd.clear();
-}
-```
+This system has wide-ranging real-world use cases, particularly in countries facing energy theft and distribution losses. Some of the key applications include:
 
-The `setup()` function initializes the LCD, buzzer, and relay. It displays an initial message on the LCD.
+- **Residential Electricity Monitoring**: Detect unauthorized connections or tampering in household energy usage.
+- **Commercial & Industrial Energy Management**: Prevent illegal power usage in factories, shops, and commercial facilities.
+- **Smart Grid Integration**: Can be scaled into smart grids for automated theft detection and control at the transformer/distribution level.
+- **Utility Company Deployment**: Helps utility providers reduce revenue losses and monitor consumer integrity.
+- **Educational & Research Projects**: Ideal for IoT, embedded systems, and energy efficiency-based academic research or student final-year projects.
+- **Remote Locations Monitoring**: With GSM/WiFi integration, the system can operate in remote areas without physical inspection.
+- **Tamper Detection in Prepaid/Postpaid Meters**: Add-on module to modern meters for enhanced security and power usage audit.
 
-### Main Loop
+<img width="2000" height="937" alt="Image" src="https://github.com/user-attachments/assets/0baee51b-7fa2-4824-846a-c62975bbbe59" />
 
-```cpp
-void loop() {
-    unsigned int temp1 = 0;
-    unsigned int temp2 = 0;
-    float maxPoint1 = 0;
-    float maxPoint2 = 0;
+---
 
-    // Read analog values and determine the maximum
-    for (int i = 0; i < 500; i++) {
-        temp1 = analogRead(analogChannel1);
-        if (temp1 > maxPoint1) {
-            maxPoint1 = temp1;
-        }
-
-        temp2 = analogRead(analogChannel2);
-        if (temp2 > maxPoint2) {
-            maxPoint2 = temp2;
-        }
-    }
-
-    // Convert analog values to voltage
-    adcValue1 = maxPoint1;
-    voltage1 = (adcValue1 / 1024.0) * 5000;
-    current1 = ((voltage1 - offsetVoltage1) / sensitivity1) / sqrt(2);
-
-    adcValue2 = maxPoint2;
-    voltage2 = (adcValue2 / 1024.0) * 5000;
-    current2 = ((voltage2 - offsetVoltage2) / sensitivity2) / sqrt(2);
-
-    // Calculate differential current
-    differentialCurrent = voltage1 - voltage2;
-
-    // Check for power theft
-    if (differentialCurrent >= 50) {
-        lcd.clear();
-        delay(100);
-        lcd.setCursor(0, 0);
-        lcd.print(" POWER THEFT !!");
-        lcd.setCursor(0, 1);
-        lcd.print(" -Disconnected-");
-
-        while (true) {
-            digitalWrite(RELAY_PIN, HIGH);
-            digitalWrite(BUZZER_PIN, HIGH);
-            delay(1500);
-            digitalWrite(BUZZER_PIN, LOW);
-            delay(1000);
-        }
-    }
-
-    // Display current readings and differential voltage
-    lcd.setCursor(0, 0);
-    lcd.print("I1=");
-    lcd.print(current1, 2);
-    lcd.print(" I2=");
-    lcd.print(current2, 2);
-    lcd.print("A");
-
-    lcd.setCursor(0, 1);
-    lcd.print("Vd=");
-    lcd.print(differentialCurrent);
-
-    delay(2500);
-}
-```
-
-The `loop()` function reads the current values from the sensors, calculates the differential current, and displays the readings on the LCD. If power theft is detected, it triggers the relay and sounds the buzzer.
-
-## Installation
-
-1. **Hardware Setup**:
-    - Connect the components to the Arduino as per the pin configuration.
-    - Ensure the power supply to the sensors, buzzer, and relay is correctly set up.
-
-2. **Software Setup**:
-    - Install the necessary libraries in the Arduino IDE.
-    - Open the `.ino` file in the Arduino IDE.
-    - Upload the code to the Arduino board.
-
-## Usage
-
-1. Power on the system.
-2. The LCD will display the current readings from the sensors.
-3. If power theft is detected (differential current ≥ 50), the system will sound the buzzer and disconnect the power via the relay.
-
-## Customization
-
-- **Adjusting Sensitivity**: Modify `sensitivity1` and `sensitivity2` to match your current sensors' specifications.
-- **Changing Detection Threshold**: Adjust the `if` condition for `differentialCurrent` to set a different threshold for power theft detection.
-- **Changing in Pins**: Use the pins of LCD and ACS712 according to code provided.
-- https://www.electronicshub.org/interfacing-acs712-current-sensor-with-arduino/
 
 ## Troubleshooting
 
-- **LCD Not Displaying Properly**: Check the connections to the LCD and ensure the correct pins are defined in the code.
-- **Incorrect Current Readings**: Verify the sensor connections and ensure the current sensors are functioning correctly.
-- **Buzzer Not Sounding**: Check the connection to the buzzer and ensure it is properly connected to the defined pin.
+| Issue                  | Solution                                  |
+|------------------------|-------------------------------------------|
+| LCD not displaying     | Check potentiometer setting and wiring    |
+| No current reading     | Calibrate sensor, verify VCC & GND        |
+| Relay not switching    | Confirm digital HIGH signal and connections |
+| GSM not working        | Use active SIM, check signal & power supply |
+| False theft alerts     | Tune or raise the differential threshold  |
+
+---
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**. Feel free to use, modify, and distribute it with proper attribution.
 
-## Acknowledgments
+## Demo Video
 
-Special thanks to the contributors of the libraries used in this project.
+https://github.com/user-attachments/assets/ea9b1b55-9d12-4969-9dc2-6b3e9aedabbd
+
+---
+
+## Remarks:
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/f0e42e47-3107-4b80-853b-63f446625a0b" />
