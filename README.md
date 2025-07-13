@@ -7,7 +7,7 @@
 ![IDE](https://img.shields.io/badge/IDE-Arduino%20IDE-purple.svg)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/3178252b-430e-46e7-93bd-1a638cf1c700" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/dcdd10fc-1420-4301-a638-cfdf3efffd69" />
 
 ---
 
@@ -17,9 +17,9 @@ Electricity theft is a major issue affecting power utilities and national econom
 
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/fad1df2b-4ed0-4536-8ab9-ac0189d1f4b7" />
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/00cd670f-a2ca-4e39-b251-b378297905ae" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/ae69209f-5ab9-427f-807f-3ce30254bc9c" />
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/66f90eb5-4eb6-442e-90f1-d998fc5ff6ed" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/00cd670f-a2ca-4e39-b251-b378297905ae" />
 
 ---
 
@@ -68,8 +68,6 @@ The system compares two current values. If the difference exceeds a threshold, i
 
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/66f90eb5-4eb6-442e-90f1-d998fc5ff6ed" />
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/0ebe5343-6a2f-46fb-a832-0530d02d4707" />
-
 ---
 
 ## Working Principle
@@ -81,14 +79,14 @@ The system compares two current values. If the difference exceeds a threshold, i
    - The **relay is triggered** to cut off power.
    - A **buzzer sounds** an alert.
    - A **message is sent** via GSM (if configured).
-
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/ae69209f-5ab9-427f-807f-3ce30254bc9c" />
+   - 
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/0ebe5343-6a2f-46fb-a832-0530d02d4707" />
 
 ---
 
 ## Software Flow & Logic
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/0ebe5343-6a2f-46fb-a832-0530d02d4707" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6edaea3b-719c-4eaa-9cc5-35e6a00bc14a" />
 
 ### Working Logic
 
@@ -178,7 +176,7 @@ This system has wide-ranging real-world use cases, particularly in countries fac
 - **Remote Locations Monitoring**: With GSM/WiFi integration, the system can operate in remote areas without physical inspection.
 - **Tamper Detection in Prepaid/Postpaid Meters**: Add-on module to modern meters for enhanced security and power usage audit.
 
-<img width="2000" height="937" alt="Image" src="https://github.com/user-attachments/assets/0baee51b-7fa2-4824-846a-c62975bbbe59" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/53c35ed3-9829-463a-80e6-d1e6c46af961" />
 
 ---
 
